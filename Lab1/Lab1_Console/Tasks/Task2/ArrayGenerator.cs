@@ -7,7 +7,7 @@ namespace Lab1
     {
         public static int[] GenerateArray()
         {
-            Console.WriteLine("Input array size with spaces:");
+            Console.WriteLine("Input array elements separated by spaces:");
             string input = Console.ReadLine();
 
             try
