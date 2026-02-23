@@ -4,7 +4,7 @@ namespace Lab1
 {
     class Task2
     {
-        static void Main(string[] args)
+        public static void Run()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
