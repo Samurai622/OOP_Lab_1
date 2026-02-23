@@ -25,8 +25,10 @@ namespace Lab1
             foreach (var item in array)            
             {
                 if (filter(item))
+                {
                     res[index] = item;
                     index++;
+                }
             }
             return res;
         }

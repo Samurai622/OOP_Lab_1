@@ -46,7 +46,7 @@ namespace Lab1
                         Console.WriteLine("Invalid choice!");
                         break;
                 }
-                Console.WriteLine($"\nПочатковий масив: [ {string.Join(", ", originalArray)} ]");
+                Console.WriteLine($"\nInitial array: [ {string.Join(", ", originalArray)} ]");
 
                 int k;
                 while(true)

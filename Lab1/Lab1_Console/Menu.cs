@@ -56,9 +56,6 @@ namespace Lab1
                         Console.WriteLine("Невірний вибір!");
                         break;
                 }
-
-                Console.WriteLine("\nНатисніть Enter...");
-                Console.ReadLine();
             }
         }
     }
