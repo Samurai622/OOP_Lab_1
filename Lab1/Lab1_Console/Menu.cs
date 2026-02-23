@@ -30,7 +30,7 @@ namespace Lab1
                         break;
 
                     case "2":
-                        // Tasks.Task2.Run();
+                        Task2.Run();
                         break;
 
                     case "3":
