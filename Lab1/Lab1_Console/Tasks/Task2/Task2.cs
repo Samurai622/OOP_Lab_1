@@ -8,7 +8,7 @@ namespace Lab1
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            int[] orginalArray = null;
+            int[] originalArray = null;
 
             while (true)
             {
