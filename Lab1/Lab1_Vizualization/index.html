@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multi Timers</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- favicon (буде мінятись через JS) -->
+  <link id="favicon" rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' x='8' font-size='48'%3E%E2%8F%B0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Таймери по секунді запуску</h1>
+      <div class="sub">
+        1) Введи кількість → 2) Створи таймери → 3) Впиши секунди і вибери завдання → 4) Start / Pause / Resume
+      </div>
+    </div>
+  </header>
+
+  <section class="panel">
+    <div class="row">
+      <label class="field">
+        <span>Кількість таймерів:</span>
+        <input id="count" type="number" min="1" max="50" value="1" />
+      </label>
+
+      <button id="build" class="btn">Створити таймери</button>
+
+      <div class="spacer"></div>
+
+      <div class="global">
+        <div class="glabel">Глобальний час:</div>
+        <div id="globalTime" class="gtime">00:00.0</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <button id="start" class="btn primary" disabled>Start</button>
+      <button id="pause" class="btn" disabled>Pause</button>
+      <button id="stop" class="btn" disabled>Stop</button>
+      <button id="reset" class="btn" disabled>Reset</button>
+
+      <div class="spacer"></div>
+
+      <label class="field inline">
+        <input id="autoSort" type="checkbox" checked />
+        <span>Сортувати таймери за секундою</span>
+      </label>
+
+      <button id="clearScreen" class="btn">Очистити екран</button>
+    </div>
+  </section>
+
+  <main class="main">
+    <section class="timers">
+      <div class="timersHead">
+        <h2>Таймери</h2>
+        <span id="timersHint" class="hint">Натисни “Створити таймери” щоб додати їх.</span>
+      </div>
+      <div id="timers" class="timersGrid"></div>
+    </section>
+
+    <section class="rightCol">
+      <section class="screenWrap">
+        <div class="screenHead">
+          <h2>Екран</h2>
+          <span id="screenStatus" class="hint">Поки пусто</span>
+        </div>
+
+        <div id="screen" class="screen">
+          <div id="screenText" class="screenText">
+            Тут будуть фрази / кубик / статуси завдань.
+          </div>
+        </div>
+      </section>
+
+      <section class="logWrap">
+        <div class="logHead">
+          <h2>Лог</h2>
+          <button id="clearLog" class="btn small">Очистити</button>
+        </div>
+        <pre id="log" class="log"></pre>
+
+        <div class="note">
+          Для задачі “Підтвердження” — сесія 100% стає на паузу, поки не натиснеш “Далі”.
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Modal підтвердження -->
+  <div id="modalBackdrop" class="backdrop hidden" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modalHead">
+        <div id="modalTitle" class="modalTitle">Підтвердження</div>
+      </div>
+
+      <div id="modalBody" class="modalBody">...</div>
+
+      <div class="modalActions">
+        <button id="modalNext" class="btn primary">Далі</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
