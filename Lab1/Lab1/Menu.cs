@@ -26,7 +26,7 @@ namespace Lab1
                 switch (input)
                 {
                     case "1":
-                        // Tasks.Task1.Run();
+                        Task1.Run();
                         break;
 
                     case "2":

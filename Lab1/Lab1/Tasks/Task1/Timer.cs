@@ -1,11 +1,11 @@
 using System;
 using System.Threading;
 
-namespace Lab1.Tasks
+namespace Lab1
 {
+    public delegate void TimerAction();
     public class Timer
     {
-        public delegate void TimerAction();
         private TimerAction _action;    
         private int _interval;
         private bool _isRunning;
