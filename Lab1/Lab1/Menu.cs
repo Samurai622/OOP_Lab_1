@@ -26,27 +26,27 @@ namespace Lab1
                 switch (input)
                 {
                     case "1":
-                        Tasks.Task1.Run();
+                        // Tasks.Task1.Run();
                         break;
 
                     case "2":
-                        //Task2.Run();
+                        // Tasks.Task2.Run();
                         break;
 
                     case "3":
-                        //Task3.Run();
+                        // Tasks.Task3.Run();
                         break;
 
                     case "4":
-                        //Task4.Run();
+                        // Tasks.Task4.Run();
                         break;
 
                     case "5":
-                        //Task5.Run();
+                        // Tasks.Task5.Run();
                         break;
 
                     case "6":
-                        //Task6.Run();
+                        // Tasks.Task6.Run();
                         break;
 
                     case "0":
