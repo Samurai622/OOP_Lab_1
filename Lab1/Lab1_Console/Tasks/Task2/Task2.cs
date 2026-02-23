@@ -15,13 +15,14 @@ namespace Lab1
                 Console.WriteLine("=== STAGE 1: ARRAY GENERATION ===");
                 Console.WriteLine("1 - Enter manually");
                 Console.WriteLine("2 - Generate randomly");
+                Console.WriteLine("0 - Exit");
                 Console.Write("Your choice: ");
                 string genChoice = Console.ReadLine();
 
                 switch (genChoice)
                 {
                     case "1":
-                        orginalArray = ArrayGenertor.GenerateArray();
+                        originalArray = ArrayGenertor.GenerateArray();
                         break;
 
                     case "2":
@@ -33,7 +34,7 @@ namespace Lab1
                                 break;
                             Console.WriteLine("Invalid input. Please enter a positive integer.");
                         }
-                        orginalArray = ArrayGenertor.GenerateRandom(size);
+                        originalArray = ArrayGenertor.GenerateRandom(size);
                         break;
                         
                     case "0":
