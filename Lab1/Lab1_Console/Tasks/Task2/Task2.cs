@@ -2,7 +2,7 @@ using System;
 
 namespace Lab1
 {
-    class Program
+    class Task2
     {
         static void Main(string[] args)
         {
