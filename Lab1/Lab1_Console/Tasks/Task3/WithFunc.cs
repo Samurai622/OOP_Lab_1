@@ -12,7 +12,7 @@ namespace Lab1
             do
             {
                 currentTerm = getTerm(n);
-                if(Math.Abs(currentTeam) >= precision)
+                if(Math.Abs(currentTerm) >= precision)
                 {
                     sum += currentTerm;
                 }
