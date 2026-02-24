@@ -34,7 +34,7 @@ namespace Lab1
                         break;
 
                     case "3":
-                        // Tasks.Task3.Run();
+                        Task3.Run();
                         break;
 
                     case "4":
