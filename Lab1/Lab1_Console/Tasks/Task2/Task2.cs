@@ -7,7 +7,7 @@ namespace Lab1
     {
         public static void Run()
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.WriteLine("Task 2. Arrays");
 
             int[] originalArray = null;
 

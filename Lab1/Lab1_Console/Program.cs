@@ -6,6 +6,8 @@ namespace Lab1
     {
         static void Main()
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            
             Menu.Start();
         }
     }

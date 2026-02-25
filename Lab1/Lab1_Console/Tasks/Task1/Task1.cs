@@ -6,9 +6,7 @@ namespace Lab1
     {
         public static void Run()
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-            Console.WriteLine("=== Динамічне створення таймерів на делегатах ===\n");
+            Console.WriteLine("=== Task 1. Timers ===\n");
 
             int timersCount = 0;
 

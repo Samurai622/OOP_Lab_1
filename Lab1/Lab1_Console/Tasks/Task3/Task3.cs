@@ -6,6 +6,8 @@ namespace Lab1
     {
         public static void Run()
         {
+            Console.WriteLine("Task 3. Calculate sum");
+
             double precision = -1;
 
             while (true)
