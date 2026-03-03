@@ -5,6 +5,24 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Tasks/Task5/Lab1_Task5.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- НЕ компілимо GUI Task5 всередині Console проекту -->
+    <Compile Remove="Tasks/Task5/**/*.cs" />
+
+    <!-- І ГОЛОВНЕ: НЕ ДАЄМО генератору бачити XAML -->
+    <AvaloniaXaml Remove="Tasks/Task5/**/*.axaml" />
+    <AvaloniaResource Remove="Tasks/Task5/**/*.axaml" />
+    <AdditionalFiles Remove="Tasks/Task5/**/*.axaml" />
+    <EmbeddedResource Remove="Tasks/Task5/**/*.axaml" />
+    <None Remove="Tasks/Task5/**/*.axaml" />
+    <Content Remove="Tasks/Task5/**/*.axaml" />
+  </ItemGroup>
 
 </Project>

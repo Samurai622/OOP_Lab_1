@@ -1,5 +1,6 @@
 using System;
 
+
 namespace Lab1
 {
     public static class Menu
@@ -39,7 +40,7 @@ namespace Lab1
                         break;
 
                     case "5":
-                        // Tasks.Task5.Run();
+                        Lab1_Task5.Task5.Run(Array.Empty<string>());
                         break;
 
                     case "6":

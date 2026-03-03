@@ -1,18 +1,20 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Lab1_Task5;
-
-public sealed class ActionHub
+namespace Lab1_Task5
 {
-    public Action ChangeOpacity { get; }
-    public Action ChangeBackground { get; }
-    public Func<Task> Hello { get; }
 
-    public ActionHub(Action changeOpacity, Action changeBackground, Func<Task> hello)
+    public sealed class ActionHub
     {
-        ChangeOpacity = changeOpacity;
-        ChangeBackground = changeBackground;
-        Hello = hello;
+        public Action ChangeOpacity { get; }
+        public Action ChangeBackground { get; }
+        public Func<Task> Hello { get; }
+
+        public ActionHub(Action changeOpacity, Action changeBackground, Func<Task> hello)
+        {
+            ChangeOpacity = changeOpacity;
+            ChangeBackground = changeBackground;
+            Hello = hello;
+        }
     }
 }

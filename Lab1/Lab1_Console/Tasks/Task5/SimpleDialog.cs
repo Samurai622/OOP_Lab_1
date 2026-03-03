@@ -2,39 +2,41 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Layout;
 
-namespace Lab1_Task5;
-
-public static class SimpleDialog
+namespace Lab1_Task5
 {
-    public static Task Show(Window owner, string message, string title)
+
+    public static class SimpleDialog
     {
-        var win = new Window
+        public static Task Show(Window owner, string message, string title)
         {
-            Title = title,
-            Width = 360,
-            Height = 180,
-            WindowStartupLocation = WindowStartupLocation.CenterOwner,
-            CanResize = false,
-            Content = new StackPanel
+            var win = new Window
             {
-                Margin = new Avalonia.Thickness(14),
-                Spacing = 12,
-                Children =
+                Title = title,
+                Width = 360,
+                Height = 180,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                CanResize = false,
+                Content = new StackPanel
                 {
-                    new TextBlock { Text = message, TextWrapping = Avalonia.Media.TextWrapping.Wrap, FontSize = 16 },
-                    new Button
+                    Margin = new Avalonia.Thickness(14),
+                    Spacing = 12,
+                    Children =
                     {
-                        Content = "OK",
-                        HorizontalAlignment = HorizontalAlignment.Right,
-                        Width = 90,
-                        [!Button.CommandProperty] = new Avalonia.Data.Binding()
+                        new TextBlock { Text = message, TextWrapping = Avalonia.Media.TextWrapping.Wrap, FontSize = 16 },
+                        new Button
+                        {
+                            Content = "OK",
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            Width = 90,
+                            [!Button.CommandProperty] = new Avalonia.Data.Binding()
+                        }
                     }
                 }
-            }
-        };
+            };
 
-        ((Button)((StackPanel)win.Content!).Children[1]).Click += (_, __) => win.Close();
+            ((Button)((StackPanel)win.Content!).Children[1]).Click += (_, __) => win.Close();
 
-        return win.ShowDialog(owner);
+            return win.ShowDialog(owner);
+        }
     }
 }

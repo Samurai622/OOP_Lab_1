@@ -3,10 +3,13 @@ using Avalonia;
 
 namespace Lab1_Task5;
 
-internal static class Program
+public static class Task5
 {
     [STAThread]
-    public static void Main(string[] args)
+    public static void Run() => Run(Array.Empty<string>());
+
+    [STAThread]
+    public static void Run(string[] args)
         => BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
 
     public static AppBuilder BuildAvaloniaApp()
