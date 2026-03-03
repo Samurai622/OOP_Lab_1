@@ -1,9 +1,76 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Lab1_Task5.MainWindow"
-        Title="Lab1_Task5">
-    Welcome to Avalonia!
+        Width="900" Height="520"
+        Title="Task 5 - Avalonia">
+
+        <Grid Margin="14" ColumnDefinitions="2*,2*" RowDefinitions="Auto,*" ColumnSpacing="14" RowSpacing="10">
+
+            <TextBlock Grid.ColumnSpan="2"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Text="Task 5: кнопки + делегати + супермегакнопка"/>
+
+            <!-- LEFT: Buttons -->
+            <Border Grid.Row="1" Grid.Column="0" Padding="12" CornerRadius="10" BorderBrush="#444" BorderThickness="1">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+            ColumnDefinitions="240,*"
+            ColumnSpacing="16"
+            RowSpacing="10">
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Text="Кнопки дій" />
+
+        <!-- Кнопки зліва -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Spacing="10">
+            <Button Name="BtnOpacity" Content="Прозорість" Height="42"/>
+            <Button Name="BtnBg" Content="Колір тла" Height="42"/>
+            <Button Name="BtnHello" Content="hello world" Height="42"/>
+        </StackPanel>
+
+        <!-- Статистика справа (на рівні з кнопками) -->
+        <Border Grid.Row="1" Grid.Column="1"
+                Padding="10"
+                CornerRadius="10"
+                BorderBrush="#444"
+                BorderThickness="1">
+            <TextBlock Name="TxtStats"
+                    Opacity="0.9"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Top"/>
+        </Border>
+
+        <!-- Розділювач -->
+        <Separator Grid.Row="3" Grid.ColumnSpan="2" Margin="0,6"/>
+
+        <!-- Суперкнопка -->
+        <Button Grid.Row="4" Grid.ColumnSpan="2"
+                Name="BtnSuper"
+                Content="СУПЕРМЕГАКНОПКА"
+                Height="52"
+                FontWeight="Bold"/>
+        </Grid>
+    </Border>
+
+    <!-- RIGHT: Checkboxes + Log -->
+    <Border Grid.Row="1" Grid.Column="1" Padding="12" CornerRadius="10" BorderBrush="#444" BorderThickness="1">
+      <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10">
+        <StackPanel Spacing="6">
+          <TextBlock FontSize="16" FontWeight="SemiBold" Text="Що робить суперкнопка (чекбокси)" />
+          <CheckBox Name="CbDoOpacity" Content="Виконати «Прозорість»" />
+          <CheckBox Name="CbDoBg" Content="Виконати «Колір тла»" />
+          <CheckBox Name="CbDoHello" Content="Виконати «hello world»" />
+          <TextBlock Opacity="0.7" Text="Суперкнопка завжди показує своє повідомлення &#10;+ виконує відмічені дії."/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" FontSize="16" FontWeight="SemiBold" Text="Лог" Margin="0,10,0,0"/>
+
+        <ListBox Grid.Row="2" Name="LogList" />
+      </Grid>
+    </Border>
+
+  </Grid>
 </Window>
