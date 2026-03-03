@@ -7,9 +7,7 @@ namespace Lab1_Task5;
 public partial class App : Application
 {
     public override void Initialize()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }
+        => AvaloniaXamlLoader.Load(this);
 
     public override void OnFrameworkInitializationCompleted()
     {
