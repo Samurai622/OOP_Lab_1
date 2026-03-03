@@ -8,7 +8,6 @@ namespace Lab1
         {
             while (true)
             {
-                Console.Clear();
                 Console.WriteLine("Lab1 - Delegates");
                 Console.WriteLine("1. Task 1");
                 Console.WriteLine("2. Task 2");
@@ -20,8 +19,6 @@ namespace Lab1
 
                 Console.Write("\nВаш вибір: ");
                 string input = Console.ReadLine();
-
-                Console.Clear();
 
                 switch (input)
                 {
@@ -38,7 +35,7 @@ namespace Lab1
                         break;
 
                     case "4":
-                        // Tasks.Task4.Run();
+                        Task4.Run();
                         break;
 
                     case "5":

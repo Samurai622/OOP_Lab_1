@@ -18,8 +18,7 @@ namespace Lab1
             x => Math.Sin(x),
             x => Math.Cos(x),
             x => Math.Tan(x),
-            x => 1 / Math.Tan(x),
-            x => throw new InvalidOperationException("Exit")
+            x => 1 / Math.Tan(x)
         };
 
         public static double Execute(string op, double value)
