@@ -51,7 +51,7 @@ namespace Lab1
                 int k;
                 while(true)
                 {
-                    Console.Write("\nEnter k (number of elements to move): ");
+                    Console.Write("\nEnter k (integer number): ");
                     if(int.TryParse(Console.ReadLine(), out k) && k != 0)
                         break;
                     Console.WriteLine("Invalid input. Please enter a non-zero integer.");
