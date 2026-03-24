@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using AvaloniaEdit.Document; 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
@@ -23,6 +24,10 @@ namespace Lab1_Task6
         {
             InitializeComponent();
             _referenceCodes = InitializeReferenceCodes();
+            
+            // ІНІЦІАЛІЗАЦІЯ AVALONIAEDIT: 
+            // Створюємо новий документ для редактора коду, щоб уникнути NullReferenceException
+            CodeInput.Document = new TextDocument(); 
         }
 
         // --- ОБРОБНИКИ ПОДІЙ ІНТЕРФЕЙСУ ---
@@ -42,7 +47,10 @@ namespace Lab1_Task6
                 {
                     await using var stream = await files[0].OpenReadAsync();
                     using var reader = new StreamReader(stream);
-                    CodeInput.Text = await reader.ReadToEndAsync();
+                    
+                    // ЗМІНА: Використовуємо CodeInput.Document.Text замість CodeInput.Text
+                    CodeInput.Document.Text = await reader.ReadToEndAsync();
+                    
                     ShowResult($"Файл {files[0].Name} успішно завантажено.", true, true);
                 }
                 catch (Exception ex)
@@ -59,7 +67,8 @@ namespace Lab1_Task6
 
             if (_referenceCodes.ContainsKey(lang) && _referenceCodes[lang].ContainsKey(algo))
             {
-                CodeInput.Text = _referenceCodes[lang][algo];
+                // ЗМІНА: Використовуємо CodeInput.Document.Text замість CodeInput.Text
+                CodeInput.Document.Text = _referenceCodes[lang][algo];
                 ShowResult("Приклад підставлено.", true, true);
             }
         }
@@ -74,7 +83,9 @@ namespace Lab1_Task6
             
             if (checkButton != null) checkButton.IsEnabled = false; 
 
-            string studentCode = CodeInput.Text ?? "";
+            // ЗМІНА: Використовуємо CodeInput.Document.Text замість CodeInput.Text
+            string studentCode = CodeInput.Document?.Text ?? "";
+            
             string lang = ((ComboBoxItem)LanguageCombo.SelectedItem!).Content!.ToString()!;
             string algo = ((ComboBoxItem)AlgorithmCombo.SelectedItem!).Content!.ToString()!;
 
