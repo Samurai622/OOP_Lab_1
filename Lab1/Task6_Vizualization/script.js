@@ -1,6 +1,7 @@
 const languageSelect = document.getElementById("language");
 const algorithmSelect = document.getElementById("algorithm");
 const codeInput = document.getElementById("codeInput");
+const lineNumbers = document.getElementById("lineNumbers");
 const resultText = document.getElementById("resultText");
 const exampleBtn = document.getElementById("exampleBtn");
 const checkBtn = document.getElementById("checkBtn");
@@ -267,10 +268,20 @@ function checkHeuristics(code, algo) {
   return true;
 }
 
+function updateLineNumbers() {
+  const lines = codeInput.value.split("\n").length || 1;
+  lineNumbers.textContent = Array.from({ length: lines }, (_, i) => i + 1).join("\n");
+}
+
+function syncScroll() {
+  lineNumbers.scrollTop = codeInput.scrollTop;
+}
+
 exampleBtn.addEventListener("click", () => {
   const lang = getSelectedLanguage();
   const algo = getSelectedAlgorithm();
   codeInput.value = referenceCodes[lang][algo];
+  updateLineNumbers();
   setResult("Приклад підставлено.", "neutral");
 });
 
@@ -285,11 +296,15 @@ fileInput.addEventListener("change", async (e) => {
   try {
     const text = await file.text();
     codeInput.value = text;
+    updateLineNumbers();
     setResult(`Файл ${file.name} успішно завантажено.`, "neutral");
   } catch (err) {
     setResult(`Помилка читання файлу: ${err.message}`, "error");
   }
 });
+
+codeInput.addEventListener("input", updateLineNumbers);
+codeInput.addEventListener("scroll", syncScroll);
 
 checkBtn.addEventListener("click", () => {
   const code = codeInput.value.trim();
@@ -338,10 +353,7 @@ checkBtn.addEventListener("click", () => {
           "success"
         );
       } else {
-        setResult(
-          "❌ Код не пройшов спрощену веб-перевірку для C#.",
-          "error"
-        );
+        setResult("❌ Код не пройшов спрощену веб-перевірку для C#.", "error");
       }
 
       return;
@@ -351,15 +363,11 @@ checkBtn.addEventListener("click", () => {
       normalizedStudent.includes(normalizedReference) ||
       normalizedReference.includes(normalizedStudent)
     ) {
-      setResult(
-        `✅ Успіх! Логіка ${lang} коду збігається з еталонною.`,
-        "success"
-      );
+      setResult(`✅ Успіх! Логіка ${lang} коду збігається з еталонною.`, "success");
     } else {
-      setResult(
-        `❌ Невірно. Структура коду відрізняється від еталонної для ${lang}.`,
-        "error"
-      );
+      setResult(`❌ Невірно. Структура коду відрізняється від еталонної для ${lang}.`, "error");
     }
   }, 250);
 });
+
+updateLineNumbers();
