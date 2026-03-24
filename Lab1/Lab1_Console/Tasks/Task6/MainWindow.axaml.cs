@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Task6
+namespace Lab1_Task6
 {
     public partial class MainWindow : Window
     {

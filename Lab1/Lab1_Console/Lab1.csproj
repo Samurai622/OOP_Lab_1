@@ -13,8 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="Tasks/Task6/Lab1_Task6.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- НЕ компілимо GUI Task5 всередині Console проекту -->
     <Compile Remove="Tasks/Task5/**/*.cs" />
+    <Compile Remove="Tasks/Task6/**/*.cs" />
 
     <!-- І ГОЛОВНЕ: НЕ ДАЄМО генератору бачити XAML -->
     <AvaloniaXaml Remove="Tasks/Task5/**/*.axaml" />
@@ -23,6 +28,10 @@
     <EmbeddedResource Remove="Tasks/Task5/**/*.axaml" />
     <None Remove="Tasks/Task5/**/*.axaml" />
     <Content Remove="Tasks/Task5/**/*.axaml" />
+
+    <EmbeddedResource Remove="Tasks/Task6/**/*.axaml" />
+    <None Remove="Tasks/Task6/**/*.axaml" />
+    <AvaloniaXaml Remove="Tasks/Task6/**/*.axaml" />
   </ItemGroup>
 
 </Project>

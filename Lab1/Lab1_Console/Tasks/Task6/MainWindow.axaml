@@ -1,6 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="Task6.MainWindow"
+        x:Class="Lab1_Task6.MainWindow"
         Title="Перевірка сортувань"
         Width="1000" Height="700"
         MinWidth="600" MinHeight="500"

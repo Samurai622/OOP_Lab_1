@@ -44,7 +44,7 @@ namespace Lab1
                         break;
 
                     case "6":
-                        // Tasks.Task6.Run();
+                        Lab1_Task6.Task6.Run(Array.Empty<string>());
                         break;
 
                     case "0":
