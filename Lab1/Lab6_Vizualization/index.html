@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Перевірка сортувань</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="top-panel">
+      <div class="title-block">
+        <h1>Перевірка сортувань</h1>
+        <p>Selection Sort / Shaker Sort (C#, Python, Java, C, C++)</p>
+      </div>
+
+      <div class="settings-card">
+        <div class="settings-grid">
+          <div class="field">
+            <label for="language">Мова програмування</label>
+            <select id="language">
+              <option>C#</option>
+              <option>Python</option>
+              <option>Java</option>
+              <option>C</option>
+              <option>C++</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="algorithm">Алгоритм</label>
+            <select id="algorithm">
+              <option>Selection Sort</option>
+              <option>Shaker Sort</option>
+            </select>
+          </div>
+
+          <div class="field button-field">
+            <label>&nbsp;</label>
+            <input type="file" id="fileInput" accept=".txt,.cs,.py,.java,.c,.cpp,.h" hidden />
+            <button id="loadFileBtn" class="btn btn-blue">Завантажити з файлу...</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="editor-card">
+      <div class="editor-header">
+        <h2>Код алгоритму</h2>
+        <button id="exampleBtn" class="btn btn-gray">Підставити приклад</button>
+      </div>
+
+      <textarea id="codeInput" spellcheck="false"></textarea>
+    </div>
+
+    <div class="bottom-card">
+      <button id="checkBtn" class="btn btn-main">Перевірити код</button>
+
+      <div class="result-block">
+        <div class="result-label">Результат:</div>
+        <div id="resultText" class="result-text neutral">Очікування перевірки...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
