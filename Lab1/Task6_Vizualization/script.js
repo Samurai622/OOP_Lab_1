@@ -306,68 +306,37 @@ fileInput.addEventListener("change", async (e) => {
 codeInput.addEventListener("input", updateLineNumbers);
 codeInput.addEventListener("scroll", syncScroll);
 
-checkBtn.addEventListener("click", () => {
-  const code = codeInput.value.trim();
-  const lang = getSelectedLanguage();
-  const algo = getSelectedAlgorithm();
+checkBtn.addEventListener("click", async () => {
+    const code = codeInput.value.trim();
+    const lang = getSelectedLanguage();
+    const algo = getSelectedAlgorithm().replace(" ", "_");
 
-  if (!code) {
-    setResult("Помилка: Код порожній.", "error");
-    return;
-  }
-
-  setResult("Аналізую код...", "neutral");
-
-  setTimeout(() => {
-    if (!checkHeuristics(code, algo)) {
-      setResult(
-        `❌ Помилка: Структура коду не відповідає алгоритму '${algo}'.\n(Наприклад: Shaker Sort має містити цикл 'while', а Selection - ні).`,
-        "error"
-      );
-      return;
-    }
-
-    const referenceCode = referenceCodes[lang][algo];
-    const normalizedStudent = normalizeCode(code);
-    const normalizedReference = normalizeCode(referenceCode);
-
-    if (lang === "C#") {
-      const hasSort = /Sort/i.test(code);
-      const hasIntArray = /int\s*\[\]/i.test(code);
-
-      if (!hasSort || !hasIntArray) {
-        setResult(
-          "❌ Для C# у веб-версії очікується метод сортування з параметром int[].",
-          "error"
-        );
+    if (!code) {
+        setResult("Помилка: Код порожній.", "error");
         return;
-      }
-
-      if (
-        normalizedStudent.includes(normalizedReference) ||
-        (algo === "Selection Sort" && /for\s*\(/.test(code)) ||
-        (algo === "Shaker Sort" && /while\s*\(/.test(code))
-      ) {
-        setResult(
-          "✅ Успіх! Код пройшов веб-перевірку.\nДля повної компіляції та замірів часу C# потрібен серверний backend.",
-          "success"
-        );
-      } else {
-        setResult("❌ Код не пройшов спрощену веб-перевірку для C#.", "error");
-      }
-
-      return;
     }
 
-    if (
-      normalizedStudent.includes(normalizedReference) ||
-      normalizedReference.includes(normalizedStudent)
-    ) {
-      setResult(`✅ Успіх! Логіка ${lang} коду збігається з еталонною.`, "success");
-    } else {
-      setResult(`❌ Невірно. Структура коду відрізняється від еталонної для ${lang}.`, "error");
+    setResult("Надсилаю код на сервер...", "neutral");
+
+    try {
+        const response = await fetch("http://localhost:3000/api/check", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ code, lang, algo })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            setResult(result.message, "success");
+        } else {
+            setResult(result.message, "error");
+        }
+    } catch (err) {
+        setResult("❌ Сервер недоступний: " + err.message, "error");
     }
-  }, 250);
 });
 
 updateLineNumbers();

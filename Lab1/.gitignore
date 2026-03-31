@@ -34,3 +34,6 @@ publish/
 # dotnet
 *.dbmdl
 *.jfm
+
+#Package
+*node_modules/
