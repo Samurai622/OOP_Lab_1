@@ -52,7 +52,7 @@ app.post("/api/check", (req, res) => {
     child.stdin.write(code);
     child.stdin.end();
 });
-
-app.listen(3000, () => {
-    console.log("SERVER RUNNING ON PORT 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`SERVER RUNNING ON PORT ${PORT}`);
 });
