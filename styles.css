@@ -1,0 +1,60 @@
+/* Фон */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #1d1f27, #0c0c0f);
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+}
+
+/* Центрований блок */
+.container {
+    text-align: center;
+    animation: fadeIn 1.2s ease;
+}
+
+/* Текст */
+.title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+/* Кнопки */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    padding: 15px 35px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3a3f51, #2a2d38);
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: 0.25s;
+    box-shadow: 0 0 10px #000;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #5865f2, #4752c4);
+    box-shadow: 0 0 20px #5865f2;
+}
+
+/* Анімація появи */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
