@@ -28,12 +28,12 @@ console.log("DLL PATH:", DLL_PATH);
 app.post("/api/check", (req, res) => {
     const { code, lang, algo } = req.body;
 
+    // ВИПРАВЛЕНО: передаємо lang та algo як є, щоб збігалося з ReferenceData у C#
     const child = spawn("dotnet", [
-    DLL_PATH,
-    "--",
-    "--cli",
-    lang.replace(" ", "_"),
-    algo.replace(" ", "_")
+        DLL_PATH,
+        "--cli",
+        lang,
+        algo
     ]);
 
     let out = "";
@@ -43,15 +43,21 @@ app.post("/api/check", (req, res) => {
     child.stderr.on("data", data => err += data.toString());
 
     child.on("close", (exitCode) => {
-        if (exitCode !== 0) {
-            return res.json({ success: false, message: err });
+        // Якщо C# повернув код помилки (наприклад 1) або щось написав у потік помилок
+        if (exitCode !== 0 || err.trim().length > 0) {
+            const finalMessage = err.trim() || out.trim() || "Критична помилка перевірки.";
+            return res.json({ success: false, message: finalMessage });
         }
-        return res.json({ success: true, message: out });
+        
+        // Якщо все успішно (exitCode === 0)
+        return res.json({ success: true, message: out.trim() });
     });
 
+    // Відправляємо код студента у C#-програму
     child.stdin.write(code);
     child.stdin.end();
 });
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`SERVER RUNNING ON PORT ${PORT}`);
