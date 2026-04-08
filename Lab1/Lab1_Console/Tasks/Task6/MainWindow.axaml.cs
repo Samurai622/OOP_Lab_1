@@ -44,13 +44,27 @@ namespace Lab1_Task6
 
         private void BtnExample_Click(object? sender, RoutedEventArgs e)
         {
-            string lang = ((ComboBoxItem)LanguageCombo.SelectedItem!).Content!.ToString()!;
-            string algo = ((ComboBoxItem)AlgorithmCombo.SelectedItem!).Content!.ToString()!;
-
-            if (ReferenceData.Codes.ContainsKey(lang) && ReferenceData.Codes[lang].ContainsKey(algo))
+            // Безпечне отримання значень з ComboBox (захист від NullReferenceException)
+            if (LanguageCombo.SelectedItem is not ComboBoxItem langItem || 
+                AlgorithmCombo.SelectedItem is not ComboBoxItem algoItem)
             {
-                CodeInput.Document.Text = ReferenceData.Codes[lang][algo];
-                ShowResult("Приклад підставлено.", true, true);
+                ShowResult("Будь ласка, оберіть мову та алгоритм.", false);
+                return;
+            }
+
+            string lang = langItem.Content!.ToString()!;
+            string algo = algoItem.Content!.ToString()!;
+
+            // Безпечна перевірка наявності ключа
+            if (ReferenceData.Codes.TryGetValue(lang, out var langCodes) && 
+                langCodes.TryGetValue(algo, out var code))
+            {
+                CodeInput.Document.Text = code;
+                ShowResult("Приклад підставлено. Зверніть увагу: це повноцінна програма.", true, true);
+            }
+            else
+            {
+                ShowResult("Для обраної мови та алгоритму немає прикладу.", false);
             }
         }
 
@@ -58,28 +72,36 @@ namespace Lab1_Task6
         {
             var checkButton = sender as Button;
 
-            TxtResult.Foreground = Avalonia.Media.Brushes.White;
-            TxtResult.Text = "Аналізую та виконую тести (це може зайняти пару секунд)...";
-            if (checkButton != null) checkButton.IsEnabled = false;
-
-            string studentCode = CodeInput.Document?.Text ?? "";
-            string lang = ((ComboBoxItem)LanguageCombo.SelectedItem!).Content!.ToString()!;
-            string algo = ((ComboBoxItem)AlgorithmCombo.SelectedItem!).Content!.ToString()!;
-
-            if (string.IsNullOrWhiteSpace(studentCode))
+            // Безпечне отримання значень з ComboBox
+            if (LanguageCombo.SelectedItem is not ComboBoxItem langItem || 
+                AlgorithmCombo.SelectedItem is not ComboBoxItem algoItem)
             {
-                ShowResult("Помилка: Код порожній.", false);
-                if (checkButton != null) checkButton.IsEnabled = true;
+                ShowResult("Помилка: Оберіть мову та алгоритм.", false);
                 return;
             }
 
-            // Передаємо логіку у сервіс. Метод UpdateUIResult передаємо як callback, 
-            // щоб сервіс міг повідомляти інтерфейс про результати.
+            string lang = langItem.Content!.ToString()!;
+            string algo = algoItem.Content!.ToString()!;
+            string studentCode = CodeInput.Document?.Text ?? "";
+
+            if (string.IsNullOrWhiteSpace(studentCode))
+            {
+                ShowResult("Помилка: Код порожній. Вставте повний код програми (з main).", false);
+                return;
+            }
+
+            // Оновлюємо UI перед стартом перевірки
+            TxtResult.Foreground = Avalonia.Media.Brushes.White;
+            TxtResult.Text = $"Компіляція та виконання тестів ({lang})...\nЗачекайте, це може зайняти до 15 секунд.";
+            if (checkButton != null) checkButton.IsEnabled = false;
+
+            // Запускаємо важку роботу у фоновому потоці
             await Task.Run(() =>
             {
                 TestingService.RunCheck(studentCode, lang, algo, UpdateUIResult);
             });
 
+            // Повертаємо доступ до кнопки після завершення
             Dispatcher.UIThread.Post(() =>
             {
                 if (checkButton != null) checkButton.IsEnabled = true;
@@ -88,6 +110,7 @@ namespace Lab1_Task6
 
         private void UpdateUIResult(string message, bool isSuccess, bool isNeutral = false)
         {
+            // Метод-callback, який TestingService безпечно викликає для оновлення UI
             Dispatcher.UIThread.Post(() => ShowResult(message, isSuccess, isNeutral));
         }
 
